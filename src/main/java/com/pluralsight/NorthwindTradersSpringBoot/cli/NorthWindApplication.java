@@ -1,5 +1,7 @@
-package com.pluralsight.NorthwindTradersSpringBoot;
+package com.pluralsight.NorthwindTradersSpringBoot.cli;
 
+import com.pluralsight.NorthwindTradersSpringBoot.model.Product;
+import com.pluralsight.NorthwindTradersSpringBoot.dao.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -41,7 +43,7 @@ public class NorthWindApplication implements CommandLineRunner {
     private  void addProduct() {
         System.out.println("Adding a new product.");
         String name = getNonEmptyString("Enter product name: ");
-        String category = getNonEmptyString("Enter product category: ");
+        int category = getIntInRange("Enter product category: ",1,8);
         double price = getDouble("Enter product price: ");
         Product product = new Product(idCounter(), name, category, price);
         productDao.add(product);
@@ -105,6 +107,8 @@ public class NorthWindApplication implements CommandLineRunner {
             }
         }
     }
+
+
 
     public  double getDouble(String prompt) {
         while (true) {
